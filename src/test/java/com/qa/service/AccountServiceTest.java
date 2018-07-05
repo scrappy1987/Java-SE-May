@@ -46,6 +46,16 @@ public class AccountServiceTest {
 		service.addAccountFromMap(janeBloggs);
 		String populatedAccountMap = util.getJSONForObject(service.getAccountMap());
 		Assert.assertEquals(accountAsJSON, populatedAccountMap);
-
 	}
+
+	@Test
+	public void getCountForFirstNamesInAccount() {
+		Assert.assertEquals(service.getNumberOfAccountWithFirstName("Joe"), 0);
+		service.addAccountFromMap(joeBloggs);
+		Assert.assertEquals(service.getNumberOfAccountWithFirstName("Joe"), 1);
+		Account joeGordon = new Account("Joe", "Gordon", "1234");
+		service.addAccountFromMap(joeGordon);
+		Assert.assertEquals(service.getNumberOfAccountWithFirstName("Joe"), 2);
+	}
+
 }
